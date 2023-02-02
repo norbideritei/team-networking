@@ -2,19 +2,19 @@ html {
   width: 100%;
 }
 
-#list {
+#teams {
   border-collapse: collapse;
   width: 100%;
 }
-#list th {
+#teams th {
   background-color: #38cf83;
   color: white;
 }
-#list th,
-#list td {
+#teams th,
+#teams td {
   border: 1px solid gray;
   padding: 5px;
 }
-#list tr:nth-child(even) {
+#teams tr:nth-child(even) {
   background-color: #f2f2f2;
 }
