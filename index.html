@@ -8,16 +8,63 @@
     <title>Document</title>
   </head>
   <body>
-    <table id="teams">
-      <thead>
-        <th>Group</th>
-        <th>Members</th>
-        <th>Project Name</th>
-        <th>Project URL</th>
-      </thead>
-      <tbody></tbody>
-      <tfoot></tfoot>
-    </table>
+    <form action="secretariat" method="post">
+      <table id="teams">
+        <thead>
+          <tr>
+            <th>Group</th>
+            <th>Members</th>
+            <th>Project Name</th>
+            <th>Project URL</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot>
+          <tr>
+            <td>
+              <input
+                type="text"
+                placeholder="Enter group"
+                name="promotion"
+                id="promotion"
+                required
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                placeholder="Enter members"
+                name="members"
+                id="members"
+                required
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                placeholder="Enter project name"
+                name="name"
+                id="name"
+                required
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                placeholder="Enter project URL"
+                name="url"
+                id="url"
+                required
+              />
+            </td>
+            <td>
+              <button type="submit">💾</button>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </form>
     <script src="index.js"></script>
   </body>
 </html>
