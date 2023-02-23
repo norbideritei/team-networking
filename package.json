@@ -1,0 +1,20 @@
+{
+  "name": "team-networking",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/norbideritei/team-networking.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/norbideritei/team-networking/issues"
+  },
+  "homepage": "https://github.com/norbideritei/team-networking#readme"
+}
