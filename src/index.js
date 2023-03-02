@@ -54,7 +54,6 @@ function onSubmit(e) {
   e.preventDefault();
 
   createTeamRequest().then(status => {
-    console.warn("status", status.success, status.id);
     if (status.success) {
       window.location.reload();
     }
