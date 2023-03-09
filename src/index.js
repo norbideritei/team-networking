@@ -1,4 +1,6 @@
 let allTeams = [];
+let editId;
+
 fetch("http://localhost:3000/teams-json", {
   method: "GET",
   headers: {
@@ -57,21 +59,26 @@ function displayTeams(teams) {
 function onSubmit(e) {
   e.preventDefault();
 
-  createTeamRequest().then(status => {
-    if (status.success) {
-      window.location.reload();
-    }
-  });
+  if (true) {
+    console.warn("update");
+  } else {
+    console.warn("save");
+    createTeamRequest().then(status => {
+      if (status.success) {
+        window.location.reload();
+      }
+    });
+  }
 }
-
 function edit(id) {
   const team = allTeams.find(team => team.id === id);
   console.warn("edit", id, team);
+  editId = id;
 
-  document.getElementById("promotion").value = "promotion";
-  document.getElementById("members").value = "members";
-  document.getElementById("name").value = "name";
-  document.getElementById("url").value = "url";
+  document.getElementById("promotion").value = team.promotion;
+  document.getElementById("members").value = team.members;
+  document.getElementById("name").value = team.name;
+  document.getElementById("url").value = team.url;
 }
 
 function initEvents() {
