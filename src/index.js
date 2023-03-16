@@ -1,17 +1,14 @@
 let allTeams = [];
 let editId;
 
-fetch("http://localhost:3000/teams-json", {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/json"
-  }
-})
-  .then(r => r.json())
-  .then(teams => {
-    allTeams = teams;
-    displayTeams(teams);
-  });
+function loadTeamsRequest() {
+  return fetch("http://localhost:3000/teams-json", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then(r => r.json());
+}
 
 function createTeamRequest(team) {
   return fetch("http://localhost:3000/teams-json/create", {
@@ -72,6 +69,13 @@ function getteamsHTML(teams) {
     .join("");
 }
 
+function loadTeams() {
+  loadTeamsRequest().then(teams => {
+    allTeams = teams;
+    displayTeams(teams);
+  });
+}
+
 function displayTeams(teams) {
   document.querySelector("#teams tbody").innerHTML = getteamsHTML(teams);
 }
@@ -83,7 +87,8 @@ function onSubmit(e) {
     team.id = editId;
     updateTeamRequest(team).then(status => {
       if (status.success) {
-        window.location.reload();
+        loadTeams();
+        e.target.reset();
       }
     });
   } else {
@@ -117,7 +122,7 @@ function initEvents() {
       const id = e.target.dataset.id;
       deleteTeamRequest(id).then(status => {
         if (status.success) {
-          window.location.reload();
+          loadTeams();
         }
       });
     } else if (e.target.matches("a.edit-btn")) {
@@ -127,4 +132,5 @@ function initEvents() {
   });
 }
 
+loadTeams();
 initEvents();
