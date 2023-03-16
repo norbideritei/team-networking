@@ -54,3 +54,8 @@ html {
   display: block;
   padding: 5px;
 }
+
+::placeholder {
+  color: #a7ee98;
+  opacity: 1;
+}

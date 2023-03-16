@@ -51,6 +51,7 @@ function readTeam() {
     url: document.getElementById("url").value
   };
 }
+
 function getteamsHTML(teams) {
   return teams
     .map(
@@ -88,7 +89,9 @@ function onSubmit(e) {
   } else {
     createTeamRequest(team).then(status => {
       if (status.success) {
-        window.location.reload();
+        allTeams.push(team);
+        displayTeams(allTeams);
+        e.target.reset();
       }
     });
   }
