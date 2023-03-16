@@ -89,6 +89,7 @@ function onSubmit(e) {
   } else {
     createTeamRequest(team).then(status => {
       if (status.success) {
+        team.id = status.id;
         allTeams.push(team);
         displayTeams(allTeams);
         e.target.reset();
