@@ -94,13 +94,17 @@ function onSubmit(e) {
     team.id = editId;
     updateTeamRequest(team).then(status => {
       if (status.success) {
-        allTeams = [...allTeams];
-        const editedTeam = allTeams.find(team => team.id === editId);
-        console.warn("editedTeam", editedTeam, team);
-        editedTeam.promotion = team.promotion;
-        editedTeam.url = team.url;
-        editedTeam.members = team.members;
-        editedTeam.name = team.name;
+        allTeams = allTeams.map(t => {
+          if (t.id === team.id) {
+            console.warn("t", t, team);
+            return {
+              ...t,
+              ...team
+            };
+          }
+          return t;
+        });
+
         displayTeams(allTeams);
         e.target.reset();
       }
