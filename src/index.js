@@ -49,6 +49,13 @@ function readTeam() {
   };
 }
 
+function writeTeam({ promotion, members, name, url }) {
+  document.getElementById("promotion").value = promotion;
+  document.getElementById("members").value = members;
+  document.getElementById("name").value = name;
+  document.getElementById("url").value = url;
+}
+
 function getteamsHTML(teams) {
   return teams
     .map(
