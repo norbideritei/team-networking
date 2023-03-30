@@ -1,3 +1,5 @@
+import { sleep } from "./utilities";
+
 let allTeams = [];
 let editId;
 
@@ -142,14 +144,14 @@ function initEvents() {
     editId = undefined;
   });
 
-  document.querySelector("#teams tbody").addEventListener("click", e => {
+  document.querySelector("#teams tbody").addEventListener("click", async e => {
     if (e.target.matches("a.remove-btn")) {
       const id = e.target.dataset.id;
-      deleteTeamRequest(id).then(status => {
-        if (status.success) {
-          loadTeams();
-        }
-      });
+      const status = await deleteTeamRequest(id);
+      if (status.success) {
+        loadTeams();
+        // TODO don't load all teams...
+      }
     } else if (e.target.matches("a.edit-btn")) {
       const id = e.target.dataset.id;
       prepareEdit(id);
@@ -159,3 +161,8 @@ function initEvents() {
 
 loadTeams();
 initEvents();
+
+console.info("sleep");
+sleep(2000).then(() => {
+  console.info("dan");
+});
