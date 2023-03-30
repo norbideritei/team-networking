@@ -19,7 +19,10 @@ html {
   background-color: #f2f2f2;
 }
 
-#url {
+#url,
+#promotion,
+#members,
+#name {
   width: 100%;
 }
 

@@ -59,17 +59,17 @@ function writeTeam({ promotion, members, name, url }) {
 function getteamsHTML(teams) {
   return teams
     .map(
-      team => `
+      ({ promotion, members, name, url, id }) => `
         <tr>
-        <td>${team.promotion}</td>
-        <td>${team.members}</td>
-        <td>${team.name}</td>
+        <td>${promotion}</td>
+        <td>${members}</td>
+        <td>${name}</td>
         <td>
-          <a href="${team.url}" target="_blank">${team.url.replace("https://github.com/", "")}</a>
+          <a href="${url}" target="_blank">${url.replace("https://github.com/", "")}</a>
         </td>
         <td>
-          <a data-id="${team.id}" class="remove-btn">✖</a>
-          <a data-id="${team.id}" class="edit-btn">&#9998;</a>
+          <a data-id="${id}" class="remove-btn">✖</a>
+          <a data-id="${id}" class="edit-btn">&#9998;</a>
         </td>
         </tr>`
     )
@@ -132,10 +132,7 @@ function prepareEdit(id) {
   const team = allTeams.find(team => team.id === id);
   editId = id;
 
-  document.getElementById("promotion").value = team.promotion;
-  document.getElementById("members").value = team.members;
-  document.getElementById("name").value = team.name;
-  document.getElementById("url").value = team.url;
+  writeTeam(team);
 }
 
 function initEvents() {
