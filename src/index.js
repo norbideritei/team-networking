@@ -1,4 +1,4 @@
-import { debounce } from "lodash";
+import debounce from "lodash/debounce";
 import { updateTeamRequest, deleteTeamRequest, createTeamRequest, loadTeamsRequest } from "./requests";
 import { $, sleep } from "./utilities";
 
