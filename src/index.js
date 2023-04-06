@@ -51,44 +51,40 @@ let oldDisplayTeams;
 
 function displayTeams(teams) {
   if (oldDisplayTeams === teams) {
-    console.warn("same teams to display");
     return;
   }
   oldDisplayTeams = teams;
   document.querySelector("#teams tbody").innerHTML = getteamsHTML(teams);
 }
 
-function onSubmit(e) {
+async function onSubmit(e) {
   e.preventDefault();
   const team = readTeam();
   if (editId) {
     team.id = editId;
-    updateTeamRequest(team).then(status => {
-      if (status.success) {
-        allTeams = allTeams.map(t => {
-          if (t.id === team.id) {
-            console.warn("t", t, team);
-            return {
-              ...t,
-              ...team
-            };
-          }
-          return t;
-        });
+    const status = await updateTeamRequest(team);
+    if (status.success) {
+      allTeams = allTeams.map(t => {
+        if (t.id === team.id) {
+          return {
+            ...t,
+            ...team
+          };
+        }
+        return t;
+      });
 
-        displayTeams(allTeams);
-        e.target.reset();
-      }
-    });
+      displayTeams(allTeams);
+      e.target.reset();
+    }
   } else {
-    createTeamRequest(team).then(status => {
-      if (status.success) {
-        team.id = status.id;
-        allTeams = [...allTeams, team];
-        displayTeams(allTeams);
-        e.target.reset();
-      }
-    });
+    const status = await createTeamRequest(team);
+    if (status.success) {
+      team.id = status.id;
+      allTeams = [...allTeams, team];
+      displayTeams(allTeams);
+      e.target.reset();
+    }
   }
 }
 
@@ -109,6 +105,7 @@ function initEvents() {
   document.querySelector("#teams tbody").addEventListener("click", async e => {
     if (e.target.matches("a.remove-btn")) {
       const id = e.target.dataset.id;
+
       const status = await deleteTeamRequest(id);
       if (status.success) {
         loadTeams();
@@ -123,8 +120,3 @@ function initEvents() {
 
 loadTeams();
 initEvents();
-
-console.info("sleep");
-sleep(2000).then(() => {
-  console.info("dan");
-});
