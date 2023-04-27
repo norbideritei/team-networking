@@ -42,9 +42,10 @@ function getteamsHTML(teams) {
 }
 
 function loadTeams() {
-  loadTeamsRequest().then(teams => {
+  return loadTeamsRequest().then(teams => {
     allTeams = teams;
     displayTeams(teams);
+    return teams;
   });
 }
 
@@ -135,5 +136,11 @@ function initEvents() {
   });
 }
 
-loadTeams();
+$("#editForm").classList.add("loading-mask");
+
+loadTeams().then(async () => {
+  await sleep(200);
+  $("#editForm").classList.remove("loading-mask");
+});
+
 initEvents();
